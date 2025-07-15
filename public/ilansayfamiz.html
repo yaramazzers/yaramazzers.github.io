@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Melis | VIP Model Tanıtım</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #000;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    header {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      padding: 20px 30px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+      display: flex;
+      justify-content: space-between;
+      z-index: 10;
+    }
+
+    .vip-button {
+      background-color: #4fc3f7;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .slider {
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .slides {
+      display: flex;
+      height: 100%;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .content-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(28, 27, 45, 0.92);
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 650px;
+      width: 90%;
+      text-align: center;
+      z-index: 6;
+    }
+
+    .details {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px 30px;
+      text-align: left;
+      font-size: 0.95rem;
+      margin: 20px 0;
+    }
+
+    .description {
+      margin: 20px 0;
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .buttons a img {
+      width: 36px;
+      height: 36px;
+    }
+
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .gallery-btn, .reserve-btn {
+      padding: 10px 22px;
+      background: #e91e63;
+      color: white;
+      border: none;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      width: 200px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      flex-direction: column;
+    }
+
+    .modal-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+      background: transparent;
+      padding: 0;
+      border-radius: 10px;
+      max-width: 450px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 1.8rem;
+      color: white;
+      cursor: pointer;
+      z-index: 10000;
+    }
+
+    .gallery-slider {
+      display: flex;
+      width: 300%;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .gallery-slide {
+      min-width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .gallery-slide img {
+  width: auto;
+  height: auto;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: block;
+  margin: auto;
+  max-height: 90vh;
+  max-width: 90vw;
+  object-fit: contain;
+
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: 10px;
+    }
+
+    .nav-btn {
+  font-size: 3rem;
+  padding: 10px 20px;
+
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      color: white;
+      background: rgba(0,0,0,0.3);
+      border: none;
+      cursor: pointer;
+      z-index: 10000;
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    .reserve-form {
+      background: #1c1b2d;
+      padding: 30px;
+      border-radius: 10px;
+      color: white;
+      max-width: 350px;
+    }
+
+    .reserve-form input, .reserve-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .reserve-form button {
+      padding: 10px;
+      background: #4fc3f7;
+      border: none;
+      width: 100%;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+      text-align: center;
+      font-size: 0.85rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h2>Melis</h2>
+  <a href="#" class="vip-button">VIP Tanıtım</a>
+</header>
+
+<div class="slider">
+  <div class="slides" id="slides">
+    <div class="slide" style="background-image: url('https://yaramazzers-ypp.xyz/2025/06/dxcstnxom25f1-800x1067.webp')"></div>
+    <div class="slide" style="background-image: url('https://yaramazzers-ypp.xyz/2025/06/1mtr7902365f1-800x1066.jpeg')"></div>
+    <div class="slide" style="background-image: url('https://yaramazzers-ypp.xyz/2025/06/bps59jisw65f1-800x1077.webp')"></div>
+  </div>
+  <div class="content-box">
+    <h1>Melis | VIP Model</h1>
+    <p>Estetik, zarafet ve profesyonel deneyim.</p>
+    <div class="details">
+      <div>📍 Şehir: <strong>İstanbul</strong></div>
+      <div>📏 Boy: <strong>172 cm</strong></div>
+      <div>⚖️ Kilo: <strong>54 kg</strong></div>
+      <div>👁️ Göz: <strong>Ela</strong></div>
+      <div>💇‍♀️ Saç: <strong>Kumral</strong></div>
+      <div>🧬 Vücut: <strong>Atletik</strong></div>
+      <div>🌎 Uyruk: <strong>Türk</strong></div>
+      <div>🗣️ Diller: <strong>Türkçe, İngilizce</strong></div>
+    </div>
+    <p class="description">
+      Melis, İstanbul’un kalbinde seçkin misafirleriyle unutulmaz deneyimler yaşamak üzere hazır. VIP hizmet, şıklık ve gizlilik garantisiyle hizmetinizde. Misafir memnuniyeti, zarafet ve gizlilik temel ilkelerimizdir. Şehir merkezindeki konumumuz ile kolay ulaşım ve konforu bir arada sunuyoruz.
+    </p>
+    <div class="buttons">
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"></a>
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram"></a>
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a>
+    </div>
+    <div class="action-buttons">
+      <button class="gallery-btn" onclick="openGallery()">📸 Galeriyi Aç</button>
+      <button class="reserve-btn" onclick="openModal()">📅 Rezervasyon Yap</button>
+    </div>
+  </div>
+</div>
+
+<!-- Galeri Modal -->
+<div class="modal" id="galleryModal">
+  <span class="close-btn" onclick="closeGallery()">✕</span>
+  <button class="nav-btn prev" onclick="changeSlide(-1)">‹</button>
+  <div class="modal-content">
+    <div class="gallery-slider" id="gallerySlider">
+      <div class="gallery-slide"><img src="https://yaramazzers-ypp.xyz/2025/06/dxcstnxom25f1-800x1067.webp"></div>
+      <div class="gallery-slide"><img src="https://yaramazzers-ypp.xyz/2025/06/1mtr7902365f1-800x1066.jpeg"></div>
+      <div class="gallery-slide"><img src="https://yaramazzers-ypp.xyz/2025/06/bps59jisw65f1-800x1077.webp"></div>
+    </div>
+  </div>
+  <button class="nav-btn next" onclick="changeSlide(1)">›</button>
+</div>
+
+<!-- Rezervasyon Modal -->
+<div class="modal" id="reserveModal">
+  <span class="close-btn" onclick="closeModal()">✕</span>
+  <div class="reserve-form">
+    <h3>Rezervasyon Yap</h3>
+    <input type="text" placeholder="Adınız" />
+    <input type="tel" placeholder="Telefon" />
+    <textarea placeholder="Mesajınız"></textarea>
+    <button>Gönder</button>
+  </div>
+</div>
+
+<footer>
+  © 2025 Melis Model Tanıtım | Tüm hakları saklıdır.
+</footer>
+
+<script>
+let currentSlide = 0;
+const slides = document.getElementById("slides");
+setInterval(() => {
+  currentSlide = (currentSlide + 1) % slides.children.length;
+  slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+}, 2000);
+
+let galleryIndex = 0;
+function openGallery() {
+  document.getElementById("galleryModal").style.display = "flex";
+  updateGallerySlide();
+}
+function closeGallery() {
+  document.getElementById("galleryModal").style.display = "none";
+}
+function changeSlide(n) {
+  galleryIndex = (galleryIndex + n + 3) % 3;
+  updateGallerySlide();
+}
+function updateGallerySlide() {
+  document.getElementById("gallerySlider").style.transform = `translateX(-${galleryIndex * 100}%)`;
+}
+
+function openModal() {
+  document.getElementById("reserveModal").style.display = "flex";
+}
+function closeModal() {
+  document.getElementById("reserveModal").style.display = "none";
+}
+</script>
+</body>
+</html>
